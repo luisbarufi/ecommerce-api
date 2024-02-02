@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.1'
+ruby '2.7.8'
 
 gem 'rails', '~> 6.0.3', '>= 6.0.3.3'
 
@@ -18,6 +18,10 @@ gem 'rack-cors', '~> 1.1.1'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails', '~> 4.0.1'
+  gem 'factory_bot_rails'
+  gem 'shoulda-matchers', '~> 4.0'
+  gem 'faker'
 end
 
 group :development do

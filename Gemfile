@@ -16,6 +16,9 @@ gem 'devise_token_auth', github: 'luisbarufi/devise_token_auth', branch: 'master
 # Cors
 gem 'rack-cors', '~> 1.1.1'
 
+# Rendering
+gem 'jbuilder', '~> 2.10.1'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 4.0.1'
@@ -30,4 +33,4 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

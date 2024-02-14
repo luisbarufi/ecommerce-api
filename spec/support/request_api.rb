@@ -3,7 +3,7 @@ module RequestAPI
     json = JSON.parse(response.body)
     symbolize_keys ? json.deep_symbolize_keys : json
   rescue
-    return {} 
+    return {}
   end
 
   def auth_header(user = nil, merge_with: {})

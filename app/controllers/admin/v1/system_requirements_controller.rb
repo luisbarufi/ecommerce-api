@@ -1,6 +1,6 @@
 module Admin::V1
   class SystemRequirementsController < ApiController
-    before_action :load_system_requirement, only: [:update, :destroy]
+    before_action :load_system_requirement, only: [:show, :update, :destroy]
 
     def index
       permitted = params.permit({ search: :name }, { order: {} }, :page, :length)
@@ -13,6 +13,8 @@ module Admin::V1
       @system_requirement.attributes = system_requirement_params
       save_system_requirement!
     end
+
+    def show; end
 
     def update
       @system_requirement.attributes = system_requirement_params

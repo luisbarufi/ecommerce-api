@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Admin V1 Products as :client", type: :request do
+RSpec.describe "Admin::V1:: Products as :client", type: :request do
   let(:user) { create(:user, profile: :client) }
 
   context "GET /products" do

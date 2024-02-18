@@ -11,7 +11,6 @@ RSpec.describe "Admin::V1::Licenses as :admin", type: :request do
     context "without any params" do
       it "returns 10 Licenses" do
         get url, headers: auth_header(user)
-
         expect(body_json['licenses'].count).to eq 10
       end
 
@@ -24,6 +23,10 @@ RSpec.describe "Admin::V1::Licenses as :admin", type: :request do
       it "returns success status" do
         get url, headers: auth_header(user)
         expect(response).to have_http_status(:ok)
+      end
+
+      it_behaves_like 'pagination meta attributes', { page: 1, length: 10, total: 10, total_pages: 1 } do
+        before { get url, headers: auth_header(user) }
       end
     end
 
@@ -48,6 +51,10 @@ RSpec.describe "Admin::V1::Licenses as :admin", type: :request do
         get url, headers: auth_header(user), params: search_params
         expect(response).to have_http_status(:ok)
       end
+
+      it_behaves_like 'pagination meta attributes', { page: 1, length: 10, total: 15, total_pages: 2 } do
+        before { get url, headers: auth_header(user), params: search_params }
+      end
     end
 
     context "with pagination params" do
@@ -71,6 +78,10 @@ RSpec.describe "Admin::V1::Licenses as :admin", type: :request do
         get url, headers: auth_header(user), params: pagination_params
         expect(response).to have_http_status(:ok)
       end
+
+      it_behaves_like 'pagination meta attributes', { page: 2, length: 5, total: 10, total_pages: 2 } do
+        before { get url, headers: auth_header(user), params: pagination_params }
+      end
     end
 
     context "with order params" do
@@ -86,6 +97,10 @@ RSpec.describe "Admin::V1::Licenses as :admin", type: :request do
       it "returns success status" do
         get url, headers: auth_header(user), params: order_params
         expect(response).to have_http_status(:ok)
+      end
+
+      it_behaves_like 'pagination meta attributes', { page: 1, length: 10, total: 10, total_pages: 1 } do
+        before { get url, headers: auth_header(user), params: order_params }
       end
     end
   end

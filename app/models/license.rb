@@ -1,6 +1,6 @@
 class License < ApplicationRecord
-  include LikeSearchable
   include Paginatable
+  include LikeSearchable
 
   belongs_to :game
 

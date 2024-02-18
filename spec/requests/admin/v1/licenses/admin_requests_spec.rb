@@ -7,14 +7,14 @@ RSpec.describe "Admin::V1::Licenses as :admin", type: :request do
   context "GET /games/:game_id/licenses" do
     let(:url) { "/admin/v1/games/#{game.id}/licenses" }
     let!(:licenses) { create_list(:license, 10, game: game) }
-    
+
     context "without any params" do
       it "returns 10 Licenses" do
         get url, headers: auth_header(user)
 
         expect(body_json['licenses'].count).to eq 10
       end
-      
+
       it "returns 10 first Licenses" do
         get url, headers: auth_header(user)
         expected_licenses = licenses[0..9].as_json(only: %i(id key platform status game_id))
@@ -36,13 +36,13 @@ RSpec.describe "Admin::V1::Licenses as :admin", type: :request do
 
       let(:search_params) { { search: { key: "SRC" } } }
 
-      # it "returns only seached licenses limited by default pagination" do
-      #   get url, headers: auth_header(user), params: search_params
-      #   expected_licenses = search_key_licenses[0..9].map do |license|
-      #     license.as_json(only: %i(id key platform status game_id))
-      #   end
-      #   expect(body_json['licenses']).to contain_exactly *expected_licenses
-      # end
+      it "returns only seached licenses limited by default pagination" do
+        get url, headers: auth_header(user), params: search_params
+        expected_licenses = search_key_licenses[0..9].map do |license|
+          license.as_json(only: %i(id key platform status game_id))
+        end
+        expect(body_json['licenses']).to contain_exactly *expected_licenses
+      end
 
       it "returns success status" do
         get url, headers: auth_header(user), params: search_params
@@ -56,16 +56,16 @@ RSpec.describe "Admin::V1::Licenses as :admin", type: :request do
 
       let(:pagination_params) { { page: page, length: length } }
 
-      # it "returns records sized by :length" do
-      #   get url, headers: auth_header(user), params: pagination_params
-      #   expect(body_json['licenses'].count).to eq length
-      # end
-      
-      # it "returns licenses limited by pagination" do
-      #   get url, headers: auth_header(user), params: pagination_params
-      #   expected_licenses = licenses[5..9].as_json(only: %i(id key platform status game_id))
-      #   expect(body_json['licenses']).to contain_exactly *expected_licenses
-      # end
+      it "returns records sized by :length" do
+        get url, headers: auth_header(user), params: pagination_params
+        expect(body_json['licenses'].count).to eq length
+      end
+
+      it "returns licenses limited by pagination" do
+        get url, headers: auth_header(user), params: pagination_params
+        expected_licenses = licenses[5..9].as_json(only: %i(id key platform status game_id))
+        expect(body_json['licenses']).to contain_exactly *expected_licenses
+      end
 
       it "returns success status" do
         get url, headers: auth_header(user), params: pagination_params
@@ -82,7 +82,7 @@ RSpec.describe "Admin::V1::Licenses as :admin", type: :request do
         expected_licenses = licenses[0..9].as_json(only: %i(id key platform status game_id))
         expect(body_json['licenses']).to contain_exactly *expected_licenses
       end
- 
+
       it "returns success status" do
         get url, headers: auth_header(user), params: order_params
         expect(response).to have_http_status(:ok)
@@ -92,7 +92,7 @@ RSpec.describe "Admin::V1::Licenses as :admin", type: :request do
 
   context "POST /games/:game_id/licenses" do
     let(:url) { "/admin/v1/games/#{game.id}/licenses" }
-    
+
     context "with valid params" do
       let(:license_params) { { license: attributes_for(:license) }.to_json }
 

@@ -34,7 +34,7 @@ RSpec.describe "Admin::V1::Licenses without authentication", type: :request do
     let(:url) { "/admin/v1/licenses/#{license.id}" }
 
     before(:each) { patch url }
-    
+
     include_examples "unauthenticated access"
   end
 

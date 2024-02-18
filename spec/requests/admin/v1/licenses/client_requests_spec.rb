@@ -35,7 +35,7 @@ RSpec.describe "Admin::V1::Licenses as :client", type: :request do
     let(:url) { "/admin/v1/licenses/#{license.id}" }
 
     before(:each) { patch url, headers: auth_header(user) }
-    
+
     include_examples "forbidden access"
   end
 

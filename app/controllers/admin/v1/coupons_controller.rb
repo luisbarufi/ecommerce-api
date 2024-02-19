@@ -14,7 +14,6 @@ module Admin::V1
       save_coupon!
     end
 
-
     def show; end
 
     def update

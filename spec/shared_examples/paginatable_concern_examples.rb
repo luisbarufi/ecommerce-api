@@ -35,7 +35,7 @@ shared_examples "paginatable concern" do |factory_name|
     context "when :page and :length are fulfilled and fits records size" do
       let(:page) { 2 }
       let(:length) { 5 }
-      
+
       it "returns right quantity of records" do
         paginated_records = described_class.paginate(page, length)
         expect(paginated_records.count).to eq length
@@ -84,7 +84,7 @@ shared_examples "paginatable concern" do |factory_name|
 
     context "when :page is fulfilled and :length is empty" do
       let(:page) { 2 }
-      
+
       it "does not return any records" do
         paginated_records = described_class.paginate(page, nil)
         expect(paginated_records.count).to eq 0
@@ -99,7 +99,7 @@ shared_examples "paginatable concern" do |factory_name|
     context "when :page and :length are fulfilled" do
       let(:page) { 2 }
       let(:length) { 5 }
-      
+
       it "returns right quantity of records" do
         paginated_records = described_class.paginate(page, length)
         expect(paginated_records.count).to eq 2
